@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\BannerText;
+use App\Models\Conversation;
 use App\Models\OrderVariantId;
 use App\Models\PaymentInfo;
 use App\Models\WebsitePurchase;
@@ -1307,6 +1308,39 @@ class ApiController extends Controller
                 'code' => $e->getCode(),
                 'message' => $e->getMessage()
             ], 500);
+        }
+    }
+
+    public function conversations(Request $request)
+    {
+        try
+        {
+            $validator = Validator::make($request->all(), [
+                'domain' => 'required|string|exists:domains,domain',
+                'user_id' => 'nullable|integer|exists:users,user_id',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'The given data was invalid',
+                    'data' => $validator->errors()
+                ], 422);
+            }
+
+
+            $domain = domainDetails($request);
+
+            $data = Conversation::where('domain_id',$domain?->id)->first();
+
+
+            return response()->json([
+                'status' => !empty($data),
+                'data' => $data
+            ]);
+
+        }catch(Exception $e){
+            return response()->json(['status'=>false, 'code'=>$e->getCode(), 'message'=>$e->getMessage()],500);
         }
     }
 }

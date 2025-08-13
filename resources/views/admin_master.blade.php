@@ -392,6 +392,15 @@
                    </p>
                </a>
            </li>
+
+           <li class="nav-item">
+               <a href="{{ route('conversions') }}" class="nav-link">
+                   <i class="nav-icon fas fa-video"></i>
+                   <p>
+                       Conversation
+                   </p>
+               </a>
+           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BannerTextController;
+use App\Http\Controllers\ConversionController;
 use App\Http\Controllers\WhyChooseUsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SliderController;
@@ -134,4 +135,8 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
     // Banner Text
     Route::get('/banner-text', [BannerTextController::class, 'index'])->name('banner-text');
     Route::post('banner-text', [BannerTextController::class, 'store'])->name('banner-text.store');
+
+    // Conversion
+    Route::get('/conversions', [ConversionController::class, 'index'])->name('conversions');
+    Route::post('conversions', [ConversionController::class, 'store'])->name('conversions.store');
 });
