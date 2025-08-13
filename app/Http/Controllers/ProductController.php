@@ -124,13 +124,14 @@ class ProductController extends Controller
                 );
                return redirect()->back()->with($notification);
             }
-            
+
             $product = new Product();
             $product->user_id = user()->id;
             $product->domain_id = getDomain()->id;
             $product->unit_id = $request->unit_id;
             $product->product_name = $request->product_name;
             $product->product_price = $request->product_price;
+            $product->discount_price = $request->discount_price;
             $product->stock_qty = $request->stock_qty;
             $product->discount = $request->discount;
             $product->description = $request->description;
@@ -204,6 +205,7 @@ class ProductController extends Controller
             $product->unit_id = $request->unit_id;
             $product->product_name = $request->product_name;
             $product->product_price = $request->product_price;
+            $product->discount_price = $request->discount_price;
             $product->stock_qty = $request->stock_qty;
             $product->discount = $request->discount;
             $product->description = $request->description;

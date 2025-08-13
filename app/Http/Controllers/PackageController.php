@@ -8,6 +8,7 @@ use App\Http\Requests\StorePackageRequest;
 use App\Http\Requests\UpdatePackageRequest;
 use DataTables;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class PackageController extends Controller
 {
@@ -37,9 +38,9 @@ class PackageController extends Controller
                         ->addColumn('status', function($row){
                             return '<label class="switch"><input class="' . ($row->status == 'Active' ? 'active-package' : 'decline-package') . '" id="status-package-update"  type="checkbox" ' . ($row->status == 'Active' ? 'checked' : '') . ' data-id="'.$row->id.'"><span class="slider round"></span></label>';
                         })
-                       
+
                         ->addColumn('action', function($row){
-                                                        
+
                            $btn = "";
                            $btn .= '&nbsp;';
                            $btn .= ' <a href="'.route('packages.show',$row->id).'" class="btn btn-primary btn-sm action-button edit-package" data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>';
@@ -47,10 +48,10 @@ class PackageController extends Controller
                             $btn .= '&nbsp;';
 
 
-                            $btn .= ' <a href="#" class="btn btn-danger btn-sm delete-package action-button" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>'; 
-        
-                          
-        
+                            $btn .= ' <a href="#" class="btn btn-danger btn-sm delete-package action-button" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+
+
+
                             return $btn;
                         })
                         ->rawColumns(['action','status'])
@@ -59,7 +60,7 @@ class PackageController extends Controller
             return view('packages.index');
         }catch(Exception $e){
             return response()->json(['status'=>false, 'code'=>$e->getCode(), 'message'=>$e->getMessage()],500);
-        } 
+        }
     }
 
     /**
@@ -79,7 +80,13 @@ class PackageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StorePackageRequest $request)
-    {   
+    {
+        // Handle file upload
+        $img_url = '';
+        if ($request->hasFile('img')) {
+            $filePath = $this->storeFile($request->file('img'));
+            $img_url = $filePath;
+        }
         DB::beginTransaction();
         try
         {
@@ -89,6 +96,9 @@ class PackageController extends Controller
             $package->short_description = $request->short_description;
             $package->price = $request->price;
             $package->max_product = $request->max_product;
+            $package->sub_title = $request->sub_title;
+            $package->demo_url = $request->demo_url;
+            $package->img = $img_url;
             $package->status = $request->status;
             $package->save();
             $package->services()->attach($request->services);
@@ -134,7 +144,14 @@ class PackageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdatePackageRequest $request, Package $package)
-    {   
+    {
+        // Handle file upload
+        $img_url = $package->img;
+        if ($request->hasFile('img')) {
+            $filePath = $this->updateFile($request->file('img'), $package);
+            $img_url = $filePath ?? '';
+        }
+
         DB::beginTransaction();
         try
         {
@@ -142,6 +159,9 @@ class PackageController extends Controller
             $package->short_description = $request->short_description;
             $package->price = $request->price;
             $package->max_product = $request->max_product;
+            $package->sub_title = $request->sub_title;
+            $package->demo_url = $request->demo_url;
+            $package->img = $img_url;
             $package->status = $request->status;
             $package->update();
             $package->services()->sync($request->services);
@@ -172,6 +192,69 @@ class PackageController extends Controller
             return response()->json(['status'=>true, 'message'=>'Successfully the package has been deleted']);
         }catch(Exception $e){
             return response()->json(['status'=>false, 'code'=>$e->getCode(), 'message'=>$e->getMessage()],500);
+        }
+    }
+    private function storeFile($file)
+    {
+        // Define the directory path
+        // TODO: Change path if needed
+        $filePath = 'uploads/package'; # change path if needed
+        $directory = public_path($filePath);
+
+        // Ensure the directory exists
+        if (!file_exists($directory)) {
+            mkdir($directory, 0777, true);
+        }
+
+        // Generate a unique file name
+        // TODO: Change path if needed
+        $fileName = uniqid('package_', true) . '.' . $file->getClientOriginalExtension();
+
+        // Move the file to the destination directory
+        $file->move($directory, $fileName);
+
+        // path & file name in the database
+        $path = $filePath . '/' . $fileName;
+        return $path;
+    }
+    private function updateFile($file, $data)
+    {
+        // Define the directory path
+        // TODO: Change path if needed
+        $filePath = 'uploads/package'; # change path if needed
+        $directory = public_path($filePath);
+
+        // Ensure the directory exists
+        if (!file_exists($directory)) {
+            mkdir($directory, 0777, true);
+        }
+
+        // Generate a unique file name
+        // TODO: Change path following storeFile function
+        $fileName = uniqid('package_', true) . '.' . $file->getClientOriginalExtension();
+
+        // Delete the old file if it exists
+        $this->deleteOldFile($data);
+
+        // Move the new file to the destination directory
+        $file->move($directory, $fileName);
+
+        // Store path & file name in the database
+        $path = $filePath . '/' . $fileName;
+        return $path;
+    }
+    private function deleteOldFile($data)
+    {
+        // TODO: ensure from database
+        if (!empty($data->img)) { # ensure from database
+            $oldFilePath = public_path($data->img); // Use without prepending $filePath
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath); // Delete the old file
+                return true;
+            } else {
+                Log::warning('Old file not found for deletion', ['path' => $oldFilePath]);
+                return false;
+            }
         }
     }
 }

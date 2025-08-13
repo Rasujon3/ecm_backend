@@ -26,6 +26,7 @@ class StoreProductRequest extends FormRequest
         return [
             'product_name' => 'required|string|max:50',
             'product_price' => 'required|numeric',
+            'discount_price' => 'required|numeric',
             'unit_id' => 'required|integer|exists:units,id',
             'stock_qty' => 'nullable|numeric',
             'discount' => 'nullable|numeric',

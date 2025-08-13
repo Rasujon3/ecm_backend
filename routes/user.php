@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BannerTextController;
 use App\Http\Controllers\WhyChooseUsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SliderController;
@@ -81,9 +82,9 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
 
 
     Route::get('/order-print/{id}', [OrderController::class, 'orderPrint']);
-    
+
     Route::post('see-order-status', [OrderController::class, 'seeOrderStatus']);
-    
+
     Route::get('/show-products/{id}', [OrderController::class, 'showProducts']);
 
 
@@ -113,7 +114,7 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
     Route::get('/purchase-history', [SettingController::class, 'purchaseHistory'])->name('purchase-history');
     Route::post('/purchase-status-update', [SettingController::class, 'userStatusUpdate']);
     Route::get('/view-purchase-history/{id}', [SettingController::class, 'viewPurchaseHistory'])->name('view-purchase-history');
-    
+
     // Why Choose Us
     Route::get('/why-choose-us', [WhyChooseUsController::class, 'index'])->name('why_choose_us.index');
     Route::get('/why-choose-us/create', [WhyChooseUsController::class, 'create'])->name('why_choose_us.create');
@@ -121,7 +122,7 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
     Route::get('/why-choose-us/{id}/edit', [WhyChooseUsController::class, 'edit'])->name('why_choose_us.edit');
     Route::post('/why-choose-us/{whyChooseUs}', [WhyChooseUsController::class, 'update'])->name('why_choose_us.update');
     Route::post('/delete/why-choose-us/{whyChooseUs}', [WhyChooseUsController::class, 'destroy'])->name('why_choose_us.destroy');
-    
+
     // Banner
     Route::get('/banner', [BannerController::class, 'index'])->name('banner.index');
     Route::get('/banner/create', [BannerController::class, 'create'])->name('banner.create');
@@ -129,4 +130,8 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
     Route::get('/banner/{id}/edit', [BannerController::class, 'edit'])->name('banner.edit');
     Route::post('/banner/{banner}', [BannerController::class, 'update'])->name('banner.update');
     Route::post('/delete/banner/{banner}', [BannerController::class, 'destroy'])->name('banner.destroy');
+
+    // Banner Text
+    Route::get('/banner-text', [BannerTextController::class, 'index'])->name('banner-text');
+    Route::post('banner-text', [BannerTextController::class, 'store'])->name('banner-text.store');
 });

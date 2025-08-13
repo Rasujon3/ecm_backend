@@ -35,9 +35,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="title">Title <span class="required">*</span></label>
+                                <label for="title">Title </label>
                                 <input type="text" name="title" class="form-control" id="title"
-                                    placeholder="Title" required="" value="{{old('title',$review->title)}}">
+                                    placeholder="Title" value="{{old('title',$review->title)}}">
                                 @error('title')
                                 <span class="alert alert-danger">{{ $message }}</span>
                                 @enderror
@@ -68,9 +68,9 @@
                             <span class="alert alert-danger">{{ $message }}</span>
                             @enderror
                           </div>
-                        </div>  
+                        </div>
 
-                        
+
                         <div class="form-group w-100 px-2">
                             <button type="submit" class="btn btn-success">Save Changes</button>
                         </div>

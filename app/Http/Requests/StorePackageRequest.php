@@ -28,6 +28,9 @@ class StorePackageRequest extends FormRequest
             'short_description' => 'required',
             'price' => 'required|numeric',
             'max_product' => 'required|integer',
+            'sub_title' => 'nullable|string|max:191',
+            'demo_url' => 'nullable|string|url|max:191',
+            'img' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg',
             'status' => 'required|in:Active,Inactive',
             'services' => 'required|array|min:1',
         ];

@@ -268,7 +268,7 @@
               </p>
             </a>
           </li>
-          
+
           <li class="nav-item">
             <a href="{{ route('why_choose_us.index') }}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
@@ -384,6 +384,14 @@
             </ul>
           </li>
 
+           <li class="nav-item">
+               <a href="{{ route('banner-text') }}" class="nav-link">
+                   <i class="nav-icon fas fa-video"></i>
+                   <p>
+                       Banner Text
+                   </p>
+               </a>
+           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -600,7 +608,7 @@
               </p>
             </a>
           </li>
-          
+
           <li class="nav-item">
             <a href="{{ route('why_choose_us.index') }}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
@@ -621,9 +629,9 @@
               </p>
             </a>
           </li>
-          
-          
-          
+
+
+
 
           @endif
 
@@ -675,9 +683,9 @@
               </p>
             </a>
           </li>
-          
-          
-          
+
+
+
           @if(user()->role_id == 1)
               <li class="nav-item">
                 <a href="{{ route('banner.index') }}" class="nav-link">

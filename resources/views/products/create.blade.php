@@ -63,7 +63,7 @@
                                 <span class="alert alert-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div> 
+                        </div>
 
 
                         <div class="col-md-6">
@@ -94,13 +94,11 @@
 
                         </div>
 
-                         
-
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="status">Select Status <span class="required">*</span></label>
-                                <input type="text" class="form-control" name="status" id="status" readonly="" placeholder="Status" value="Inactive" required=""> 
+                                <input type="text" class="form-control" name="status" id="status" readonly="" placeholder="Status" value="Inactive" required="">
                                 @error('status')
                                 <span class="alert alert-danger">{{ $message }}</span>
                                 @enderror
@@ -108,13 +106,24 @@
                         </div>
 
                         <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="discount_price">Discount Price (BDT) <span class="required">*</span></label>
+                                <input type="text" name="discount_price" class="form-control numericInput" id="discount_price"
+                                       placeholder="Discount Price" required="" value="{{old('discount_price')}}">
+                                @error('discount_price')
+                                <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
                           <div class="form-group">
-                            <label for="description">Description <span class="required">*</span></label>  
+                            <label for="description">Description <span class="required">*</span></label>
                             <textarea class="form-control description" name="description">{!!old('description')!!}</textarea>
                             @error('description')
                                 <span class="alert alert-danger">{{ $message }}</span>
                             @enderror
-                          </div>  
+                          </div>
                         </div>
 
                         <div class="col-md-12">
@@ -129,9 +138,9 @@
                                  <span class="alert alert-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div> 
+                        </div>
 
-                        
+
                         <div class="form-group w-100 px-2">
                             <button type="submit" class="btn btn-primary">Next Step</button>
                         </div>
@@ -161,8 +170,8 @@
           </div>
           <input type="hidden" id="unit_status" value="Active"/>
           <div class="form-group">
-            <button type="submit" class="btn btn-success">Submit</button>  
-          </div>  
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -174,7 +183,7 @@
 @endsection
 
 @push('scripts')
-  
+
   <script src="{{asset('custom/multiple_files.js')}}"></script>
 
   <script>
@@ -211,10 +220,10 @@
                         $('#addUnitModal').modal('hide');
 
                 },
-                                
+
             });
         });
-    });  
+    });
   </script>
 
 @endpush

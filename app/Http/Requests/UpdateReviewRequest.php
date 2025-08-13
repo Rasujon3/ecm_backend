@@ -24,7 +24,7 @@ class UpdateReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:50',
+            'title' => 'nullable|string|max:50',
             'status' => 'required|in:Active,Inactive',
         ];
     }

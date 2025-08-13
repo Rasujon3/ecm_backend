@@ -79,6 +79,28 @@
                             </div>
                         </div>
 
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sub_title">Sub Title <span class="required">*</span></label>
+                                <input type="text" name="sub_title" class="form-control" id="sub_title"
+                                       placeholder="Sub Title" required="" value="{{old('sub_title')}}">
+                                @error('sub_title')
+                                    <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="demo_url">Demo URL <span class="required">*</span></label>
+                                <input type="text" name="demo_url" class="form-control" id="demo_url"
+                                       placeholder="Demo URL" required="" value="{{old('demo_url')}}">
+                                @error('demo_url')
+                                    <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="short_description">Short Description <span class="required">*</span></label>
@@ -87,7 +109,24 @@
                                 <span class="alert alert-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div> 
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="img">Background Image <span class="required">*</span></label>
+                                <input
+                                    name="img"
+                                    type="file"
+                                    id="img"
+                                    accept="image/*"
+                                    class="dropify"
+                                    data-height="150"
+                                />
+                                @error('img')
+                                    <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="col-md-12">
                           <div class="form-group">
@@ -102,11 +141,11 @@
                               	  	<input type="checkbox" name="services[]" id="{{$service->id}}" value="{{$service->id}}"/>
                               	    <label for="{{$service->id}}">{{$service->title}}</label>
                               	  </div>
-                              	@endforeach	
+                              	@endforeach
                               	</div>
-                              </div>	
+                              </div>
                             </div>
-                          </div> 	
+                          </div>
                         </div>
 
                         <div class="form-group w-100 px-2">
