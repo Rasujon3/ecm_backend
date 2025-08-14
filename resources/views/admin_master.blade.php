@@ -386,7 +386,7 @@
 
            <li class="nav-item">
                <a href="{{ route('banner-text') }}" class="nav-link">
-                   <i class="nav-icon fas fa-video"></i>
+                   <i class="nav-icon fas fa-text-height"></i>
                    <p>
                        Banner Text
                    </p>
@@ -395,7 +395,7 @@
 
            <li class="nav-item">
                <a href="{{ route('conversions') }}" class="nav-link">
-                   <i class="nav-icon fas fa-video"></i>
+                   <i class="nav-icon fas fa-comments"></i>
                    <p>
                        Conversation
                    </p>
