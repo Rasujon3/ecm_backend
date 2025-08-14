@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Log;
 
 class BannerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth_check');
+    }
     public function index(Request $request)
     {
         try

@@ -7,8 +7,12 @@ use App\Models\Video;
 
 class VideoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth_check');
+    }
     public function addVideo(Request $request)
-    {   
+    {
     	$video = Video::where('user_id',user()->id)->first();
     	return view('videos.add_video', compact('video'));
     }
@@ -26,19 +30,19 @@ class VideoController extends Controller
 			        'video_url' => $request->video_url,
 			        'video_id' => getYouTubeVideoId($request),
 			    ]
-			); 
+			);
 
 			$notification=array(
                 'messege'=>'Successfully updated',
                 'alert-type'=>'success',
             );
 
-            return redirect()->back()->with($notification); 
+            return redirect()->back()->with($notification);
 
     	}catch(Exception $e){
     		return response()->json(['status'=>false, 'code'=>$e->getCode(), 'message'=>$e->getMessage()],500);
     	}
     }
 
-    
+
 }

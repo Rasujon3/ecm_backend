@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Log;
 
 class WhyChooseUsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth_check');
+    }
     public function index(Request $request)
     {
         try

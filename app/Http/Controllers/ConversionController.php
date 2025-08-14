@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Log;
 
 class ConversionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth_check');
+    }
     public function index()
     {
         $conversions = Conversation::where('user_id', user()->id)->first();
