@@ -32,7 +32,7 @@
                 @csrf
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="banner_text">Banner Text <span class="required">*</span></label>
                                 <input type="text" name="banner_text" class="form-control" id="banner_text"

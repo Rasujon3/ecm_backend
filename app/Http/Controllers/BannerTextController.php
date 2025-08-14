@@ -46,7 +46,7 @@ class BannerTextController extends Controller
             }
 
             $notification = [
-                'message'    => 'Successfully updated',
+                'messege'    => 'Successfully updated',
                 'alert-type' => 'success',
             ];
 
@@ -62,7 +62,7 @@ class BannerTextController extends Controller
             ]);
 
             $notification=array(
-                'message' => 'Something went wrong!!!',
+                'messege' => 'Something went wrong!!!',
                 'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
