@@ -105,12 +105,23 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="discount_price">Discount Price (BDT) <span class="required">*</span></label>
                                 <input type="text" name="discount_price" class="form-control numericInput" id="discount_price"
                                        placeholder="Discount Price" required="" value="{{old('discount_price')}}">
                                 @error('discount_price')
+                                <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="fake_stocks">Fake Stocks for customer view </label>
+                                <input type="text" name="fake_stocks" class="form-control numericInput" id="fake_stocks"
+                                       placeholder="Fake Stocks for customer view" value="{{old('fake_stocks')}}">
+                                @error('fake_stocks')
                                 <span class="alert alert-danger">{{ $message }}</span>
                                 @enderror
                             </div>

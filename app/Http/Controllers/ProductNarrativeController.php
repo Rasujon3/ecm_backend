@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\AboutUs;
 use App\Models\BannerText;
 use App\Models\LoginPageContent;
+use App\Models\ProductCharacteristicsTitle;
+use App\Models\ProductNarrativeTitle;
 use App\Models\Setting;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class BannerTextController extends Controller
+class ProductNarrativeController extends Controller
 {
     public function __construct()
     {
@@ -18,33 +20,33 @@ class BannerTextController extends Controller
     }
     public function index()
     {
-        $bannerText = BannerText::where('user_id', user()->id)->first();
-        return view('bannerText.bannerText',compact('bannerText'));
+        $title = ProductNarrativeTitle::where('user_id', user()->id)->first();
+        return view('productNarrative.product_narrative_title',compact('title'));
     }
     public function store(Request $request)
     {
         try
         {
-            $data = BannerText::where('user_id', user()->id)->first();
+            $data = ProductNarrativeTitle::where('user_id', user()->id)->first();
 
             $defaults = [
-                'banner_text' => $data ? $data->banner_text : null,
+                'title' => $data ? $data->title : null,
             ];
 
             if ($data) {
-                BannerText::where('id', $data->id)->update(
+                ProductNarrativeTitle::where('id', $data->id)->update(
                     [
                         'user_id' => user()->id,
 			            'domain_id' => getDomain()->id,
-                        'banner_text' => $request->banner_text ?? $defaults['banner_text'],
+                        'title' => $request->title ?? $defaults['title'],
                     ]
                 );
             } else {
-                BannerText::create(
+                ProductNarrativeTitle::create(
                     [
                         'user_id' => user()->id,
 			            'domain_id' => getDomain()->id,
-                        'banner_text' => $request->banner_text ?? $defaults['banner_text'],
+                        'title' => $request->title ?? $defaults['title'],
                     ]
                 );
             }
@@ -58,7 +60,7 @@ class BannerTextController extends Controller
 
         } catch (Exception $e) {
             // Log the error
-            Log::error('Error in updating BannerText: ', [
+            Log::error('Error in updating ProductNarrativeTitle: ', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
                 'line' => $e->getLine(),

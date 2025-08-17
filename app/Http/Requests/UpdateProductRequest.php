@@ -26,10 +26,11 @@ class UpdateProductRequest extends FormRequest
         return [
             'product_name' => 'required|string|max:50',
             'product_price' => 'required|numeric',
-            'unit_id' => 'required|integer|exists:units,id', 
+            'unit_id' => 'required|integer|exists:units,id',
             'stock_qty' => 'nullable|numeric',
             'discount' => 'nullable|numeric',
             'description' => 'required',
+            'fake_stocks' => 'nullable|numeric',
             'status' => 'required|in:Active,Inactive',
         ];
     }

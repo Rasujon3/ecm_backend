@@ -33,6 +33,7 @@ class StoreProductRequest extends FormRequest
             'description' => 'required',
             'gallery_images' => 'required|array|min:1',
             'status' => 'required|in:Active,Inactive',
+            'fake_stocks' => 'nullable|numeric',
         ];
     }
 }

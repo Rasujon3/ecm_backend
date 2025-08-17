@@ -68,4 +68,8 @@ Route::middleware(['custom.cors', 'throttle:60,1'])->group(function () {
     Route::post('/find-delivery-charge', [ApiController::class, 'findDeliveryCharge']);
 
     Route::post('conversations', [ApiController::class, 'conversations']);
+
+    Route::post('product-characteristics', [ApiController::class, 'productCharacteristics']);
+
+    Route::post('product-narrative', [ApiController::class, 'productNarrative']);
 });

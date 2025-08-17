@@ -135,6 +135,7 @@ class ProductController extends Controller
             $product->stock_qty = $request->stock_qty;
             $product->discount = $request->discount;
             $product->description = $request->description;
+            $product->fake_stocks = $request->fake_stocks;
             //$product->status = auth()->user()->status ==='Inactive' ? "Active" : "Inactive";
             $product->status = 'Inactive';
             $product->save();
@@ -209,6 +210,7 @@ class ProductController extends Controller
             $product->stock_qty = $request->stock_qty;
             $product->discount = $request->discount;
             $product->description = $request->description;
+            $product->fake_stocks = $request->fake_stocks;
             $product->save();
             $notification=array(
                 'messege'=>'Successfully the product has been updated',

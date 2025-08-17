@@ -452,6 +452,56 @@
           </li>
 
           <li class="nav-item">
+               <a href="#" class="nav-link">
+                   <i class="nav-icon fas fa-list"></i>
+                   <p>
+                       Product Characteristics
+                       <i class="fas fa-angle-left right"></i>
+                   </p>
+               </a>
+               <ul class="nav nav-treeview">
+                   <li class="nav-item">
+                       <a href="{{ route('product-characteristics-title') }}" class="nav-link">
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Title</p>
+                       </a>
+                   </li>
+                   <li class="nav-item">
+                       <a href="{{route('product_characteristics_details.index')}}" class="nav-link">
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Details</p>
+                       </a>
+                   </li>
+
+               </ul>
+          </li>
+
+          <li class="nav-item">
+                   <a href="#" class="nav-link">
+                       <i class="nav-icon fas fa-list"></i>
+                       <p>
+                           Product Narrative
+                           <i class="fas fa-angle-left right"></i>
+                       </p>
+                   </a>
+                   <ul class="nav nav-treeview">
+                       <li class="nav-item">
+                           <a href="{{ route('product-narrative-title') }}" class="nav-link">
+                               <i class="far fa-circle nav-icon"></i>
+                               <p>Title</p>
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a href="{{route('product_narrative_details.index')}}" class="nav-link">
+                               <i class="far fa-circle nav-icon"></i>
+                               <p>Details</p>
+                           </a>
+                       </li>
+
+                   </ul>
+               </li>
+
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-map"></i>
               <p>

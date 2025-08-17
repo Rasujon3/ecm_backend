@@ -3,6 +3,9 @@
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BannerTextController;
 use App\Http\Controllers\ConversionController;
+use App\Http\Controllers\ProductCharacteristicsController;
+use App\Http\Controllers\ProductCharacteristicsDetailsController;
+use App\Http\Controllers\ProductNarrativeController;
 use App\Http\Controllers\WhyChooseUsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SliderController;
@@ -139,4 +142,28 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
     // Conversion
     Route::get('/conversions', [ConversionController::class, 'index'])->name('conversions');
     Route::post('conversions', [ConversionController::class, 'store'])->name('conversions.store');
+
+    // Product characteristics title
+    Route::get('product-characteristics-title', [ProductCharacteristicsController::class, 'index'])->name('product-characteristics-title');
+    Route::post('product-characteristics-title', [ProductCharacteristicsController::class, 'store'])->name('product-characteristics-title.store');
+
+    // Product characteristics details
+    Route::get('/product-characteristics-details', [ProductCharacteristicsDetailsController::class, 'index'])->name('product_characteristics_details.index');
+    Route::get('/product-characteristics-details/create', [ProductCharacteristicsDetailsController::class, 'create'])->name('product_characteristics_details.create');
+    Route::post('/product-characteristics-details', [ProductCharacteristicsDetailsController::class, 'store'])->name('product_characteristics_details.store');
+    Route::get('/product-characteristics-details/{id}/edit', [ProductCharacteristicsDetailsController::class, 'edit'])->name('product_characteristics_details.edit');
+    Route::post('/product-characteristics-details/{productCharacteristicsDetails}', [ProductCharacteristicsDetailsController::class, 'update'])->name('product_characteristics_details.update');
+    Route::post('/delete/product-characteristics-details/{productCharacteristicsDetails}', [ProductCharacteristicsDetailsController::class, 'destroy'])->name('product_characteristics_details.destroy');
+
+    // Product narrative title
+    Route::get('product-narrative-title', [ProductNarrativeController::class, 'index'])->name('product-narrative-title');
+    Route::post('product-narrative-title', [ProductNarrativeController::class, 'store'])->name('product-narrative-title.store');
+
+    // Product narrative details
+    Route::get('/product-narrative-details', [ProductCharacteristicsDetailsController::class, 'index'])->name('product_narrative_details.index');
+    Route::get('/product-narrative-details/create', [ProductCharacteristicsDetailsController::class, 'create'])->name('product_narrative_details.create');
+    Route::post('/product-narrative-details', [ProductCharacteristicsDetailsController::class, 'store'])->name('product_narrative_details.store');
+    Route::get('/product-narrative-details/{id}/edit', [ProductCharacteristicsDetailsController::class, 'edit'])->name('product_narrative_details.edit');
+    Route::post('/product-narrative-details/{productCharacteristicsDetails}', [ProductCharacteristicsDetailsController::class, 'update'])->name('product_narrative_details.update');
+    Route::post('/delete/product-narrative-details/{productCharacteristicsDetails}', [ProductCharacteristicsDetailsController::class, 'destroy'])->name('product_narrative_details.destroy');
 });

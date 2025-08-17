@@ -7,6 +7,10 @@ use App\Models\BannerText;
 use App\Models\Conversation;
 use App\Models\OrderVariantId;
 use App\Models\PaymentInfo;
+use App\Models\ProductCharacteristicsDetails;
+use App\Models\ProductCharacteristicsTitle;
+use App\Models\ProductNarrativeDetails;
+use App\Models\ProductNarrativeTitle;
 use App\Models\WebsitePurchase;
 use Exception;
 use Illuminate\Http\Request;
@@ -1341,6 +1345,84 @@ class ApiController extends Controller
 
         }catch(Exception $e){
             return response()->json(['status'=>false, 'code'=>$e->getCode(), 'message'=>$e->getMessage()],500);
+        }
+    }
+
+    public function productCharacteristics(Request $request)
+    {
+        try
+        {
+            $validator = Validator::make($request->all(), [
+                'domain' => 'required|string|exists:domains,domain',
+                'user_id' => 'nullable|integer|exists:users,user_id',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'The given data was invalid',
+                    'data' => $validator->errors()
+                ], 422);
+            }
+
+
+            $domain = domainDetails($request);
+
+            $title = ProductCharacteristicsTitle::where('domain_id',$domain?->id)->first();
+            $data = ProductCharacteristicsDetails::where('domain_id',$domain?->id)->get();
+
+
+            return response()->json([
+                'status' => !empty($data),
+                'title' => ($title && $title->title) ? $title->title : '',
+                'data' => $data
+            ]);
+
+        } catch(Exception $e) {
+            return response()->json([
+                'status' => false,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+    public function productNarrative(Request $request)
+    {
+        try
+        {
+            $validator = Validator::make($request->all(), [
+                'domain' => 'required|string|exists:domains,domain',
+                'user_id' => 'nullable|integer|exists:users,user_id',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'The given data was invalid',
+                    'data' => $validator->errors()
+                ], 422);
+            }
+
+
+            $domain = domainDetails($request);
+
+            $title = ProductNarrativeTitle::where('domain_id',$domain?->id)->first();
+            $data = ProductNarrativeDetails::where('domain_id',$domain?->id)->get();
+
+
+            return response()->json([
+                'status' => !empty($data),
+                'title' => ($title && $title->title) ? $title->title : '',
+                'data' => $data
+            ]);
+
+        } catch(Exception $e) {
+            return response()->json([
+                'status' => false,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ],500);
         }
     }
 }
