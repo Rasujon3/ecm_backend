@@ -49,7 +49,7 @@ class ProductCharacteristicsDetailsController extends Controller
                     ->rawColumns(['description', 'action'])
                     ->make(true);
             }
-            return view('productNarrative.index');
+            return view('productCharacteristics.index');
         } catch(Exception $e){
             return response()->json(['status'=>false, 'code'=>$e->getCode(), 'message'=>$e->getMessage()],500);
         }
@@ -57,7 +57,7 @@ class ProductCharacteristicsDetailsController extends Controller
 
     public function create()
     {
-        return view('productNarrative.create');
+        return view('productCharacteristics.create');
     }
 
     public function store(WhyChooseUsRequest $request)
@@ -95,7 +95,7 @@ class ProductCharacteristicsDetailsController extends Controller
     public function edit($id)
     {
         $item = ProductNarrativeDetails::findOrFail($id);
-        return view('productNarrative.edit', compact('item'));
+        return view('productCharacteristics.edit', compact('item'));
     }
 
     public function update(WhyChooseUsRequest $request, ProductNarrativeDetails $productCharacteristicsDetails)
