@@ -6,6 +6,7 @@ use App\Http\Controllers\ConversionController;
 use App\Http\Controllers\ProductCharacteristicsController;
 use App\Http\Controllers\ProductCharacteristicsDetailsController;
 use App\Http\Controllers\ProductNarrativeController;
+use App\Http\Controllers\ProductNarrativeDetailsController;
 use App\Http\Controllers\WhyChooseUsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SliderController;
@@ -27,33 +28,33 @@ Route::get('/add-user-product', [IndexController::class, 'addUserProduct']);
 
 Route::group(['middleware' => 'prevent-back-history'],function(){
 
-	//sliders
+    //sliders
 
     Route::resource('sliders', SliderController::class);
 
-  //expenses
+    //expenses
 
     Route::resource('expenses', ExpenseController::class);
 
-  //units
+    //units
 
     Route::resource('units', UnitController::class);
 
-  //products
+    //products
 
     Route::resource('products', ProductController::class);
     Route::get('/redirect-demo-url', [ProductController::class, 'redirectDemoUrl'])->name('redirect-demo-url');
 
-  //variants
+    //variants
 
     Route::get('/add-variant/{id}', [VariantController::class, 'addVariant']);
     Route::post('store-variants', [VariantController::class, 'storeVariants']);
 
-  //revieews
+    //revieews
 
     Route::resource('reviews', ReviewController::class);
 
-  //areas
+    //areas
 
     Route::resource('ariadhakas', AriadhakaController::class);
 
@@ -67,12 +68,12 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
 
     Route::post('save-video', [VideoController::class, 'saveVideo']);
 
-  //report
+    //report
 
     Route::get('/sales-report', [ReportController::class, 'salesReport']);
     Route::get('/finance-report', [ReportController::class, 'financeReport']);
 
-  //orders
+    //orders
 
     Route::get('/orders', [OrderController::class, 'orders'])->name('my.orders');
 
@@ -92,7 +93,7 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
     Route::get('/show-products/{id}', [OrderController::class, 'showProducts']);
 
 
-  //settings
+    //settings
 
     Route::get('/refer-settings', [ReferController::class, 'referSettings']);
     Route::post('settings-refer', [ReferController::class, 'settingsRefer']);
@@ -160,10 +161,10 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
     Route::post('product-narrative-title', [ProductNarrativeController::class, 'store'])->name('product-narrative-title.store');
 
     // Product narrative details
-    Route::get('/product-narrative-details', [ProductCharacteristicsDetailsController::class, 'index'])->name('product_narrative_details.index');
-    Route::get('/product-narrative-details/create', [ProductCharacteristicsDetailsController::class, 'create'])->name('product_narrative_details.create');
-    Route::post('/product-narrative-details', [ProductCharacteristicsDetailsController::class, 'store'])->name('product_narrative_details.store');
-    Route::get('/product-narrative-details/{id}/edit', [ProductCharacteristicsDetailsController::class, 'edit'])->name('product_narrative_details.edit');
-    Route::post('/product-narrative-details/{productCharacteristicsDetails}', [ProductCharacteristicsDetailsController::class, 'update'])->name('product_narrative_details.update');
-    Route::post('/delete/product-narrative-details/{productCharacteristicsDetails}', [ProductCharacteristicsDetailsController::class, 'destroy'])->name('product_narrative_details.destroy');
+    Route::get('/product-narrative-details', [ProductNarrativeDetailsController::class, 'index'])->name('product_narrative_details.index');
+    Route::get('/product-narrative-details/create', [ProductNarrativeDetailsController::class, 'create'])->name('product_narrative_details.create');
+    Route::post('/product-narrative-details', [ProductNarrativeDetailsController::class, 'store'])->name('product_narrative_details.store');
+    Route::get('/product-narrative-details/{id}/edit', [ProductNarrativeDetailsController::class, 'edit'])->name('product_narrative_details.edit');
+    Route::post('/product-narrative-details/{productNarrativeDetails}', [ProductNarrativeDetailsController::class, 'update'])->name('product_narrative_details.update');
+    Route::post('/delete/product-narrative-details/{productNarrativeDetails}', [ProductNarrativeDetailsController::class, 'destroy'])->name('product_narrative_details.destroy');
 });
