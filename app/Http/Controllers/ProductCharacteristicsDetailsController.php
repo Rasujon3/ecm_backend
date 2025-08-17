@@ -24,7 +24,7 @@ class ProductCharacteristicsDetailsController extends Controller
         {
             if($request->ajax()){
 
-                $productCharacteristicsDetails = ProductNarrativeDetails::where('user_id', Auth::user()->id,)->select('*')->latest();
+                $productCharacteristicsDetails = ProductCharacteristicsDetails::where('user_id', Auth::user()->id,)->select('*')->latest();
 
                 return Datatables::of($productCharacteristicsDetails)
                     ->addIndexColumn()
@@ -37,7 +37,7 @@ class ProductCharacteristicsDetailsController extends Controller
 
                         $btn = "";
                         $btn .= '&nbsp;';
-                        $btn .= ' <a href="'.route('product_narrative_details.edit',$row->id).'" class="btn btn-primary btn-sm action-button edit-service" data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>';
+                        $btn .= ' <a href="'.route('product_characteristics_details.edit',$row->id).'" class="btn btn-primary btn-sm action-button edit-service" data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>';
 
                         $btn .= '&nbsp;';
 
@@ -64,7 +64,7 @@ class ProductCharacteristicsDetailsController extends Controller
     {
         try
         {
-            ProductNarrativeDetails::create([
+            ProductCharacteristicsDetails::create([
                 'user_id' => Auth::user()->id,
                 'domain_id' => getDomain()->id,
                 'description' => $request->description,
@@ -74,10 +74,10 @@ class ProductCharacteristicsDetailsController extends Controller
                 'alert-type' => 'success',
             );
 
-            return redirect()->route('product_narrative_details.index')->with($notification);
+            return redirect()->route('product_characteristics_details.index')->with($notification);
         } catch(Exception $e) {
             // Log the error
-            Log::error('Error in storing ProductNarrativeDetails: ', [
+            Log::error('Error in storing ProductCharacteristicsDetails: ', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
                 'line' => $e->getLine(),
@@ -88,17 +88,17 @@ class ProductCharacteristicsDetailsController extends Controller
                 'messege' => 'Something went wrong!!!',
                 'alert-type' => 'error'
             ];
-            return redirect()->route('product_narrative_details.index')->with($notification);
+            return redirect()->route('product_characteristics_details.index')->with($notification);
         }
     }
 
     public function edit($id)
     {
-        $item = ProductNarrativeDetails::findOrFail($id);
+        $item = ProductCharacteristicsDetails::findOrFail($id);
         return view('productCharacteristics.edit', compact('item'));
     }
 
-    public function update(WhyChooseUsRequest $request, ProductNarrativeDetails $productCharacteristicsDetails)
+    public function update(WhyChooseUsRequest $request, ProductCharacteristicsDetails $productCharacteristicsDetails)
     {
         try
         {
@@ -109,14 +109,14 @@ class ProductCharacteristicsDetailsController extends Controller
                 'alert-type' => 'success',
             );
 
-            return redirect()->route('product_narrative_details.index')->with($notification);
+            return redirect()->route('product_characteristics_details.index')->with($notification);
 
         } catch(Exception $e) {
             return response()->json(['status'=>false, 'code'=>$e->getCode(), 'message'=>$e->getMessage()],500);
         }
     }
 
-    public function destroy(ProductNarrativeDetails $productCharacteristicsDetails)
+    public function destroy(ProductCharacteristicsDetails $productCharacteristicsDetails)
     {
         try
         {
@@ -126,7 +126,7 @@ class ProductCharacteristicsDetailsController extends Controller
                 'alert-type' => 'success',
             );
 
-            return redirect()->route('product_narrative_details.index')->with($notification);
+            return redirect()->route('product_characteristics_details.index')->with($notification);
 
         } catch(Exception $e) {
             return response()->json(['status'=>false, 'code'=>$e->getCode(), 'message'=>$e->getMessage()],500);
